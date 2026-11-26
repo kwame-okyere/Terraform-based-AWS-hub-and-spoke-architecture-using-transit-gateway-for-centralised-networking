@@ -1,0 +1,10 @@
+#terraform real values
+*.tfvars
+
+#terraform state Real IDs
+*tfstate*
+
+.terraform/
+
+*.edit
+
