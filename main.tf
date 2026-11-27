@@ -17,7 +17,7 @@ resource "aws_subnet" "this" {
   vpc_id            = aws_vpc.this[each.value.spoke].id
   cidr_block        = cidrsubnet(var.spokes[each.value.spoke], 8, each.value.netnum)
   availability_zone = each.value.az
-  tags              = { Name = "${each.key}" }
+  tags              = { Name = each.key }
 }
 
 resource "aws_ec2_transit_gateway" "this" {
