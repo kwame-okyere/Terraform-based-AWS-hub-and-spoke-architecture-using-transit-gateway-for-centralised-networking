@@ -6,9 +6,9 @@ resource "aws_vpc" "this" {
 
 locals {
   subnets = {
-    "prod_sub"   = { spoke = "prod", az = "eu-north-1a", netnum = 1 }
-    "dev_sub"    = { spoke = "dev", az = "eu-north-1a", netnum = 1 }
-    "shared_sub" = { spoke = "shared", az = "eu-north-1a", netnum = 1 }
+    "prod_sub"   = { spoke = "prod", az = "${var.region}a", netnum = 1 }
+    "dev_sub"    = { spoke = "dev", az = "${var.region}a", netnum = 1 }
+    "shared_sub" = { spoke = "shared", az = "${var.region}a", netnum = 1 }
   }
 }
 
@@ -17,14 +17,14 @@ resource "aws_subnet" "this" {
   vpc_id            = aws_vpc.this[each.value.spoke].id
   cidr_block        = cidrsubnet(var.spokes[each.value.spoke], 8, each.value.netnum)
   availability_zone = each.value.az
-  tags              = { Name = "${each.key}" }
+  tags              = { Name = each.key }
 }
 
 resource "aws_ec2_transit_gateway" "this" {
   description                     = "Allow traffic to spokes"
   default_route_table_propagation = "disable"
   default_route_table_association = "disable"
-  tags                            = { Name = "{tgw}" }
+  tags                            = { Name = "tgw" }
 }
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
@@ -37,8 +37,8 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 
 locals {
   routetables = {
-    spokes = "rtb1"
-    shared = "rtb2"
+    spokes = "Spoke vpcs: prod and dev"
+    shared = "Shared services vpc"
   }
 }
 
