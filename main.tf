@@ -6,9 +6,9 @@ resource "aws_vpc" "this" {
 
 locals {
   subnets = {
-    "prod_sub"   = { spoke = "prod", az = "eu-north-1a", netnum = 1 }
-    "dev_sub"    = { spoke = "dev", az = "eu-north-1a", netnum = 1 }
-    "shared_sub" = { spoke = "shared", az = "eu-north-1a", netnum = 1 }
+    "prod_sub"   = { spoke = "prod", az = "${var.region}a", netnum = 1 }
+    "dev_sub"    = { spoke = "dev", az = "${var.region}a", netnum = 1 }
+    "shared_sub" = { spoke = "shared", az = "${var.region}a", netnum = 1 }
   }
 }
 
