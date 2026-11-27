@@ -37,8 +37,8 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 
 locals {
   routetables = {
-    spokes = "rtb1"
-    shared = "rtb2"
+    spokes = "Spoke vpcs: prod and dev"
+    shared = "Shared services vpc"
   }
 }
 
